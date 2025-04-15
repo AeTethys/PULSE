@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Loader2, Search, X } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 // Comprehensive mock search results for demonstration
 const mockSearchResults = {
@@ -198,19 +199,8 @@ export function SearchBar({ className }: SearchBarProps) {
     inputRef.current?.focus()
   }
 
-  // Get the current search query from URL
-  React.useEffect(() => {
-    // Use window.location instead of useSearchParams
-    const urlParams = new URLSearchParams(window.location.search)
-    const queryParam = urlParams.get("q")
-    if (queryParam) {
-      setQuery(queryParam)
-      handleSearch(queryParam)
-    }
-  }, [handleSearch])
-
   return (
-    <div ref={searchRef} className={className}>
+    <div ref={searchRef} className={cn("relative", className)}>
       {!isExpanded ? (
         <Button
           variant="outline"

@@ -37,7 +37,9 @@ export default function Footer() {
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-                <p className="text-sm text-muted-foreground/80 mt-1">Every Learner. Every Dream. Every Step of the Way</p>
+                <p className="text-sm text-muted-foreground/80 mt-1">
+                  Every Learner. Every Dream. Every Step of the Way
+                </p>
               </div>
               <p className="text-sm text-muted-foreground">
                 Transforming education with AI-driven personalization to ensure every student reaches their full
