@@ -1,4 +1,4 @@
-export default function NotFound() {
+export default function CustomErrorPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-5 text-center">
       <h1 className="text-4xl font-bold mb-4">Page Not Found</h1>

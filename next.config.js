@@ -9,17 +9,22 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Completely disable the App Router's handling of 404 pages
-  // This will force Next.js to use the Pages Router's 404 page
-  output: "export", // Use static export
-  distDir: "out", // Output to the 'out' directory
-  // Explicitly exclude problematic routes from static generation
-  exportPathMap: async (defaultPathMap) => {
-    // Remove /404 and /_not-found from the static export
-    const filteredPaths = { ...defaultPathMap }
-    delete filteredPaths["/404"]
-    delete filteredPaths["/_not-found"]
-    return filteredPaths
+  // Use a different approach to handle 404 pages
+  // Instead of exportPathMap, we'll use trailingSlash and custom handling
+  trailingSlash: true, // This helps with static exports
+
+  // Disable the automatic static optimization for problematic routes
+  // by using rewrites to redirect them
+  async rewrites() {
+    return {
+      beforeFiles: [
+        // Redirect /404 to a custom page to avoid prerendering issues
+        {
+          source: "/404",
+          destination: "/custom-error",
+        },
+      ],
+    }
   },
 }
 
