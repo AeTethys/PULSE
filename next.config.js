@@ -9,28 +9,17 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Disable automatic static optimization for problematic routes
-  async rewrites() {
-    return {
-      beforeFiles: [
-        // Redirect /404 to a different path to avoid prerendering issues
-        {
-          source: "/404",
-          destination: "/custom-404",
-        },
-        // Redirect /_not-found to a different path to avoid prerendering issues
-        {
-          source: "/_not-found",
-          destination: "/custom-not-found",
-        },
-      ],
-    }
-  },
-  // Explicitly set which pages should be statically generated
-  // This helps avoid issues with dynamic routes that use client components
-  experimental: {
-    // Disable static generation for problematic routes
-    excludeDefaultMomentLocales: true,
+  // Completely disable the App Router's handling of 404 pages
+  // This will force Next.js to use the Pages Router's 404 page
+  output: "export", // Use static export
+  distDir: "out", // Output to the 'out' directory
+  // Explicitly exclude problematic routes from static generation
+  exportPathMap: async (defaultPathMap) => {
+    // Remove /404 and /_not-found from the static export
+    const filteredPaths = { ...defaultPathMap }
+    delete filteredPaths["/404"]
+    delete filteredPaths["/_not-found"]
+    return filteredPaths
   },
 }
 

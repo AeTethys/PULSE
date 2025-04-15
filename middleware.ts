@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
     pathname === "/favicon.ico" ||
     pathname === "/robots.txt" ||
     pathname === "/404" ||
-    pathname === "/_not-found" // Skip handling /_not-found specifically
+    pathname === "/_not-found"
   ) {
     return NextResponse.next()
   }
