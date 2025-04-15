@@ -6,7 +6,7 @@
       "use": "@vercel/next",
       "config": {
         "skipBuildCache": true,
-        "buildCommand": "npm run custom-build"
+        "buildCommand": "npm run build"
       }
     }
   ],
