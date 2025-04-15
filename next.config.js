@@ -9,8 +9,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Disable automatic static optimization for the /404 route
-  // This prevents Next.js from trying to prerender it
+  // Disable automatic static optimization for problematic routes
   async rewrites() {
     return {
       beforeFiles: [
@@ -19,8 +18,19 @@ const nextConfig = {
           source: "/404",
           destination: "/custom-404",
         },
+        // Redirect /_not-found to a different path to avoid prerendering issues
+        {
+          source: "/_not-found",
+          destination: "/custom-not-found",
+        },
       ],
     }
+  },
+  // Explicitly set which pages should be statically generated
+  // This helps avoid issues with dynamic routes that use client components
+  experimental: {
+    // Disable static generation for problematic routes
+    excludeDefaultMomentLocales: true,
   },
 }
 

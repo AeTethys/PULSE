@@ -1,4 +1,4 @@
-export default function NotFound() {
+export default function CustomNotFound() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="text-center max-w-lg">

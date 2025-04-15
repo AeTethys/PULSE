@@ -11,7 +11,8 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/api") ||
     pathname === "/favicon.ico" ||
     pathname === "/robots.txt" ||
-    pathname === "/404" // Skip handling /404 specifically
+    pathname === "/404" ||
+    pathname === "/_not-found" // Skip handling /_not-found specifically
   ) {
     return NextResponse.next()
   }
@@ -42,7 +43,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match all paths except static assets and /404
-    "/((?!_next/static|_next/image|favicon.ico|404).*)",
+    // Match all paths except static assets, /404, and /_not-found
+    "/((?!_next/static|_next/image|favicon.ico|404|_not-found).*)",
   ],
 }
