@@ -9,10 +9,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Use a different approach to handle 404 pages
-  // Instead of exportPathMap, we'll use trailingSlash and custom handling
-  trailingSlash: true, // This helps with static exports
-
+  // Completely disable the App Router
+  // This will force Next.js to use only the Pages Router
+  pageExtensions: ["js", "jsx", "ts", "tsx", "mdx"],
   // Disable the automatic static optimization for problematic routes
   // by using rewrites to redirect them
   async rewrites() {
