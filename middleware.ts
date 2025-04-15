@@ -15,12 +15,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // For App Router 404 paths, redirect to the Pages Router 404 page
-  if (pathname === "/404" || pathname === "/_not-found") {
-    const url = request.nextUrl.clone()
-    url.pathname = "/404"
-    return NextResponse.rewrite(url)
-  }
+  // REMOVED: For App Router 404 paths, redirect to the Pages Router 404 page
+  // This was causing issues with the build process
 
   // Log 404 at the edge if we have Edge Config
   const response = NextResponse.next()
