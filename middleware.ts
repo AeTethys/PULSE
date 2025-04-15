@@ -10,13 +10,11 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
     pathname === "/favicon.ico" ||
-    pathname === "/robots.txt"
+    pathname === "/robots.txt" ||
+    pathname === "/404" // Skip handling /404 specifically
   ) {
     return NextResponse.next()
   }
-
-  // REMOVED: For App Router 404 paths, redirect to the Pages Router 404 page
-  // This was causing issues with the build process
 
   // Log 404 at the edge if we have Edge Config
   const response = NextResponse.next()
@@ -44,7 +42,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match all paths except static assets
-    "/((?!_next/static|_next/image|favicon.ico).*)",
+    // Match all paths except static assets and /404
+    "/((?!_next/static|_next/image|favicon.ico|404).*)",
   ],
 }
