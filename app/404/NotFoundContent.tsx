@@ -1,10 +1,10 @@
-import { headers } from "next/headers"
 import Link from "next/link"
 
-export default function NotFoundContent() {
-  const headersList = headers()
-  const from = headersList.get("from")
+interface NotFoundContentProps {
+  from: string | null
+}
 
+export default function NotFoundContent({ from }: NotFoundContentProps) {
   return (
     <div className="text-center max-w-lg">
       <h1 className="text-6xl font-bold text-gray-800 mb-4">404</h1>
