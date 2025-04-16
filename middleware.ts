@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server"
-import type { NextRequest } from "next/server"
 
-export function middleware(request: NextRequest) {
+export function middleware(request: any) {
   // Track 404s at the edge
   const pathname = request.nextUrl.pathname
 
@@ -13,13 +12,6 @@ export function middleware(request: NextRequest) {
     pathname === "/robots.txt"
   ) {
     return NextResponse.next()
-  }
-
-  // For App Router 404 paths, redirect to the Pages Router 404 page
-  if (pathname === "/404" || pathname === "/_not-found") {
-    const url = request.nextUrl.clone()
-    url.pathname = "/404"
-    return NextResponse.rewrite(url)
   }
 
   // Log 404 at the edge if we have Edge Config
