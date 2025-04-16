@@ -1,5 +1,3 @@
-export const dynamic = "error"
+import NotFoundPage from "./404/NotFoundContent"
 
-export default function NotFound() {
-  throw new Error("This page should not be rendered")
-}
+export default NotFoundPage
