@@ -1,12 +1,9 @@
-import { Suspense } from "react"
-import NotFoundContent from "@/components/not-found-content"
+import NotFoundClientWrapper from "@/components/not-found-client-wrapper"
 
 export default function NotFound() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Suspense fallback={<p className="text-gray-500 text-lg">Loading...</p>}>
-        <NotFoundContent />
-      </Suspense>
+      <NotFoundClientWrapper />
     </div>
   )
 }

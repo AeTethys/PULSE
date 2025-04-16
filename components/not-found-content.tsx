@@ -1,17 +1,25 @@
 "use client"
 
-import { useEffect } from "react"
-import { useSearchParams } from "next/navigation"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 
 export default function NotFoundContent() {
-  const searchParams = useSearchParams()
-  const referrer = searchParams.get("from") || ""
+  const [referrer, setReferrer] = useState("")
 
   useEffect(() => {
+    // Safe way to get URL parameters on the client side
+    const urlParams = new URLSearchParams(window.location.search)
+    const fromParam = urlParams.get("from")
+    if (fromParam) {
+      setReferrer(fromParam)
+    }
+
     // Log 404 error if needed
-    console.log("404 error occurred", { path: window.location.pathname, referrer })
-  }, [referrer])
+    console.log("404 error occurred", {
+      path: window.location.pathname,
+      referrer: fromParam || document.referrer,
+    })
+  }, [])
 
   return (
     <div className="flex flex-col items-center justify-center p-8 max-w-2xl mx-auto text-center">
@@ -19,6 +27,7 @@ export default function NotFoundContent() {
       <h2 className="text-3xl font-semibold text-gray-800 mb-6">Page Not Found</h2>
       <p className="text-xl text-gray-600 max-w-md mb-8">
         We couldn't find the page you're looking for. It might have been moved or doesn't exist.
+        {referrer && <span className="block mt-2">You came from: {referrer}</span>}
       </p>
       <div className="flex flex-col sm:flex-row gap-4">
         <Link
